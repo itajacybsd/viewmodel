@@ -47,22 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final viewModel = PersonViewmodel();
 
-  void _listener() {
-    setState(() {});
-  }
+  // void _listener() {
+  //   setState(() {});
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    viewModel.addListener(_listener);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   viewModel.addListener(_listener);
+  // }
 
-  // Não esquecer de usar o dispose para remover os Listeners
-  @override
-  void dispose() {
-    super.dispose();
-    viewModel.removeListener(_listener);
-  }
+  // // Não esquecer de usar o dispose para remover os Listeners
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   viewModel.removeListener(_listener);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => viewModel.calcularIMC(person),
               child: const Text('Calculate IMC'),
             ),
-            Text(viewModel.result),
+            ListenableBuilder(
+              // adiciona e remove no dispose automaticamente
+              listenable: viewModel,
+              builder: (context, child) {
+                return Text(viewModel.result);
+              },
+            ),
           ],
         ),
       ),
