@@ -55,6 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // Não esquecer de usar o dispose para remover os Listeners
+  @override
+  void dispose() {
+    super.dispose();
+    viewModel.removeListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
