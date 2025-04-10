@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:viewmodel/models/person.dart';
+import 'package:viewmodel/viewmodel/person_viewmodel.dart';
 
 void main() {
   runZonedGuarded(
@@ -44,16 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var person = Person();
 
-  //representação do estado
+  final viewModel = PersonViewmodel();
 
-  var result = '';
-
-  // açao da mudança do estado
-  void calcularIMC() {
-    // Chama o método calcularIMC da instância de Person
-    final imc = person.calcularIMC();
-    setState(() {
-      result = 'IMC: ${imc.toStringAsFixed(2)}';
+  @override
+  void initState() {
+    super.initState();
+    viewModel.addListener(() {
+      setState(() {});
     });
   }
 
@@ -82,10 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: person.setWeight,
             ),
             ElevatedButton(
-              onPressed: calcularIMC,
+              onPressed: () => viewModel.calcularIMC(person),
               child: const Text('Calculate IMC'),
             ),
-            Text(result),
+            Text(viewModel.result),
           ],
         ),
       ),
