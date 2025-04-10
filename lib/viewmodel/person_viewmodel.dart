@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:viewmodel/models/person.dart';
 
+// O objetivo dessa classe é representar e gerenciar o estado
+
+// Gerenciando o estado
 class PersonViewmodel extends ChangeNotifier {
   //representação do estado
 
