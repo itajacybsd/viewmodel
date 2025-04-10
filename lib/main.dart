@@ -47,21 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final viewModel = PersonViewmodel();
 
+  void _listener() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
-    viewModel.addListener(() {
-      setState(() {});
-    });
+    viewModel.addListener(_listener);
   }
 
   // Não esquecer de usar o dispose para remover os Listeners
   @override
   void dispose() {
     super.dispose();
-    viewModel.removeListener(() {
-      setState(() {});
-    });
+    viewModel.removeListener(_listener);
   }
 
   @override
